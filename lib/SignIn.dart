@@ -79,7 +79,7 @@ class SignInLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             texts,
-            Image.asset('assets/images/man_meditating.png'),
+            Image.asset('assets/images/man_meditating.png')
           ],
         ),
       ),
