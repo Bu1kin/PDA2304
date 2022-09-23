@@ -1,16 +1,38 @@
-# pr1
+# Практическая работа №1
+## Тема: "Разработка графического интерфейса по макетам"
 
-A new Flutter project.
+### Цель работы: повторить графический интерфейс макетов, используя базовые знания языка программирования dart
 
-## Getting Started
+### Ход работы:
+На выбор было предоставлено пять макетов:
+<p align="center">
+  <img src="/layouts_imgs/layout1.PNG"/>
+</p>
+Три из которых были выбраны для повторения:
 
-This project is a starting point for a Flutter application.
+1. Макет №2;
+2. Макет №3;
+3. Макет №4.
 
-A few resources to get you started if this is your first Flutter project:
+Первый макет. Для его создания были использованы следующие виджеты: Container, Row, Column, Expanded, Text, Icon, ListView, а также MaterialApp и Scaffold. Для закругления углов контейнеров был использован класс BoxDecoration, а для разделения элементов ListView использовался его метод .separated.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Результат:
+<p align="center">
+  <img src="/assets/images/layout1.PNG"/>
+</p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Второй макет. Для его создания были использованы такие же виджеты, что и для первого макета, но с добавлением пары новых, например, виджеты Card для создания красивых элементов-карточек, Padding, а также SingleChildScrollView для горизонатального скроллинга элементов. Самая большая сложность в этом макете, как и во всей практчиеской в целом, на решение которой ушло 3 дня, было решение поместить ListView с горизонтальным скроллингом в ListView, который возвращался в методе build, в следствие чего вылетала ошибка разметки. Решение оказалось очень простым. Вместо использования второго ListView было принято решение использовать SingleChildScrollView. 
+
+Результат:
+<p align="center">
+  <img src="/assets/images/layout2.PNG"/>
+</p>
+
+Третий макет. Для его создания были использованы всё те же виджеты, что и для первого макета, только в виджет Scaffold был добавлен параметр backgroundColor для изменения цвета заднего фона всего окна.
+
+Результат:
+<p align="center">
+  <img src="/assets/images/layout3.PNG"/>
+</p>
+
+### Вывод: в данной практической работе были сделаны три макета окон приложения с помощью базовых знаний языка программирования dart.
