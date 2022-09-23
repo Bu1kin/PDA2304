@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pr1/2nd_layout.dart';
-import 'package:pr1/3rd_layout.dart';
-import 'package:pr1/4th_layout.dart';
+import 'package:pr1/CurrentPlaylist.dart';
+import 'package:pr1/Playlists.dart';
+import 'package:pr1/SignIn.dart';
 
 void main() {
   runApp(const MyApp());
