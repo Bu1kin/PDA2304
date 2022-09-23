@@ -556,7 +556,7 @@ class PlaylistsLayout extends StatelessWidget {
             listtest,
             card,
             card12,
-            card34,
+            card34
           ],
         ),
       ),
