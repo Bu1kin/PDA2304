@@ -158,7 +158,7 @@ class CurrentPlaylistLayout extends StatelessWidget {
                 'assets/images/man_stand.png',
                 width: 500.0,
                 height: 240.0,
-                fit: BoxFit.cover,
+                fit: BoxFit.cover
               ),
             ),
             description,
