@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class Vtoroy extends StatelessWidget {
-  const Vtoroy({super.key});
+class CurrentPlaylistLayout extends StatelessWidget {
+  const CurrentPlaylistLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
