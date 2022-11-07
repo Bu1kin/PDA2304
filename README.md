@@ -3,6 +3,10 @@
 
 ### Цель работы: Реализовать таблицы для предметной области "Магазин автомобилей"
 ### Ход работы:
+В ходе практической работы была реализована инфологическая модель базы данных:
+<p align="center">
+  <img src="/images/erwin.PNG"/>
+</p>
 Реализовать класс который отвечает за базу данных.
 <p align="center">
   <img src="/images/dbClass.PNG"/>
@@ -16,7 +20,7 @@
 
 - onCreateTable - создание таблиц
 <p align="center">
-  <img src="/images/onCreateTable.PNG"/>
+  <img src="/images/onCreatTable.PNG"/>
 </p>
 
 - onUpdateTable - обновление таблиц
