@@ -1,16 +1,46 @@
-# flutter_application_1
+# Практическая работа №2
+## Тема: "Создание базы данных и таблиц"
 
-A new Flutter project.
+### Цель работы: Реализовать таблицы для предметной области "Магазин автомобилей"
+### Ход работы:
+В ходе практической работы была реализована инфологическая модель базы данных:
+<p align="center">
+  <img src="/images/erwin.PNG"/>
+</p>
+Реализовать класс который отвечает за базу данных.
+<p align="center">
+  <img src="/images/dbClass.PNG"/>
+</p>
 
-## Getting Started
+Реализовать следующие функции:
+- init - инициализация базы данных для всех платформ
+<p align="center">
+  <img src="/images/init.PNG"/>
+</p>
 
-This project is a starting point for a Flutter application.
+- onCreateTable - создание таблиц
+<p align="center">
+  <img src="/images/onCreatTable.PNG"/>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+- onUpdateTable - обновление таблиц
+<p align="center">
+  <img src="/images/onUpdateTable.PNG"/>
+</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- onInitTable - заполнение таблиц данными
+<p align="center">
+  <img src="/images/onInitTable.PNG"/>
+</p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- onDropDataBase - удаление базы данных
+<p align="center">
+  <img src="/images/onDropDataBase.PNG"/>
+</p>
+
+Результат работы программы:
+<p align="center">
+  <img src="/images/db.PNG"/>
+</p>
+
+### Вывод: в данной практической работе были реализованы класс базы данных, класс с запросами к базе данных по созданию таблиц, а также функции добавления, изменения и удаления данных из таблиц, и каскадное удаление внешних ключей.
