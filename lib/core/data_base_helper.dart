@@ -3,6 +3,9 @@ import 'package:flutter_application_1/common/database_request.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
+import '../data/model/role.dart';
 
 
 class DataBaseHelper{
@@ -13,19 +16,30 @@ class DataBaseHelper{
   late final Directory _appDocumentDirectory;
   late final String _pathDB;
   late final Database dataBase;
+  late final Database _sqfdb;
   final int _version = 1;
 
   Future<void> init() async{
     _appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
-
-    _pathDB = join(_appDocumentDirectory.path, 'booksstore.db');
+    _pathDB = join(_appDocumentDirectory.path, 'carmarket.db');
 
     if(Platform.isLinux || Platform.isWindows || Platform.isMacOS){
-
+      sqfliteFfiInit();
+      _sqfdb = await databaseFactoryFfi.openDatabase(
+        _pathDB,
+        options: OpenDatabaseOptions(
+          onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
+          version: _version,
+          onCreate: (db, version) async {
+            await onCreateTable(db);
+          }
+        )
+      );
     }
     else{
       dataBase = await openDatabase(
         _pathDB,
+        onUpgrade: (db, oldVersion, newVersion) => onUpdateTable(db),
         version: _version,
         onCreate: (db, version) async {
           await onCreateTable(db);
@@ -39,5 +53,39 @@ class DataBaseHelper{
     for(var i = 0; i < DataBaseRequest.tableList.length; i++){
       await db.execute(DataBaseRequest.tableCreateList[i]);
     }
+    await onInitTable(db);
+  }
+
+  Future<void> onUpdateTable(Database db) async {
+    var tables = await db.rawQuery('select name from sqlite_master');
+
+    for(var table in DataBaseRequest.tableList){
+      if(tables.contains(table)){
+        await db.execute(DataBaseRequest.deleteTable(table));
+      }
+    }
+    
+    for (var i = 0; i < DataBaseRequest.tableList.length; i++){
+      await db.execute(DataBaseRequest.tableCreateList[i]);
+    }
+  }
+
+  Future<void> onInitTable(Database db) async {
+    try{
+      db.insert(DataBaseRequest.tableRole, Role(name_role: 'Администратор').toMap());
+      db.insert(DataBaseRequest.tableRole, Role(name_role: 'Пользователь').toMap());
+
+      
+    } on DatabaseException catch(e){}
+  }
+
+  Future<void> onDropDataBase(Database db) async {
+    try{
+      await db.close();
+      
+      for(var i = 0; i < DataBaseRequest.tableList.length; i++){
+        await db.delete(DataBaseRequest.tableList[i]);
+      }
+    } on DatabaseException catch(e){}
   }
 }

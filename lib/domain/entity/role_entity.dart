@@ -1,8 +1,8 @@
 class RoleEntity{
   late int id;
-  final String role;
+  final String name_role;
 
-  RoleEntity({required this.role});
+  RoleEntity({required this.name_role});
 }
 
 enum RoleEnum {admin, user}
