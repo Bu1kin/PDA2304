@@ -3,44 +3,55 @@
 
 ### Цель работы: Реализовать регистрацию и авторизацию пользователя. Реализовать валидацию для полей (минимум 3 на поле).
 ### Ход работы:
-В ходе практической работы была реализована инфологическая модель базы данных:
+
+Экран авторизации:
 <p align="center">
-  <img src="/images/erwin.PNG"/>
-</p>
-Реализовать класс который отвечает за базу данных.
-<p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/signInPage.jpg"/>
 </p>
 
-Реализовать следующие функции:
-- init - инициализация базы данных для всех платформ
+Проверка на пустоту ввода
 <p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/signInPageValidation.jpg"/>
 </p>
 
-- onCreateTable - создание таблиц
+Вёрстка окна авторизации, валидация полей
 <p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/signInCode.jpg"/>
 </p>
 
-- onUpdateTable - обновление таблиц
+Окно администратора. Вход при помощи: логин: admin, пароль: admin (заранее созданный администратор в системе)
 <p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/adminPage.jpg"/>
 </p>
 
-- onInitTable - заполнение таблиц данными
+Окно регистрации
 <p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/signUpPage.jpg"/>
 </p>
 
-- onDropDataBase - удаление базы данных
+Разнообразные проверки на поля (по 3 минимум)
 <p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/signUpPageValidation.jpg"/>
 </p>
 
-Результат работы программы:
+Вёрстка окна регистрации, валидация полей
 <p align="center">
-  <img src="/images/.PNG"/>
+  <img src="/images/signUpCode.jpg"/>
+</p>
+
+Окно пользователя
+<p align="center">
+  <img src="/images/userPage.jpg"/>
+</p>
+
+Верстка окна администратора
+<p align="center">
+  <img src="/images/Page.jpg"/>
+</p>
+
+SnackBar при ненайденном пользователе
+<p align="center">
+  <img src="/images/SnackBar.jpg"/>
 </p>
 
 ### Вывод: в данной практической работе были реализованы авторизация и регистрация с использованием Sqlite, а также сделана вёрстка для окон авторизации, регистрации, администратора и пользователя. На каждое поле была реализована валидация, как минимум, по трем критериям.
