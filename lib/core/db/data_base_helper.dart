@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:flutter_application_1/common/database_request.dart';
+import 'package:flutter_application_1/data/model/user.dart';
+import 'package:flutter_application_1/domain/entity/role_entity.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-import '../data/model/role.dart';
+import '../../data/model/role.dart';
 
 
 class DataBaseHelper{
@@ -71,12 +73,14 @@ class DataBaseHelper{
   }
 
   Future<void> onInitTable(Database db) async {
-    try{
+    //try{
       db.insert(DataBaseRequest.tableRole, Role(name_role: 'Администратор').toMap());
       db.insert(DataBaseRequest.tableRole, Role(name_role: 'Пользователь').toMap());
 
-      
-    } on DatabaseException catch(e){}
+      db.insert(DataBaseRequest.tableUser, User(login: 'admin', password: 'admin', FIO: 'Админов Админ Админович', id_role: RoleEnum.admin).toMap());
+
+      print("12312312312312313123");
+    //} on DatabaseException catch(e){}
   }
 
   Future<void> onDropDataBase(Database db) async {

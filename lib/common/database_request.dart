@@ -41,7 +41,7 @@ abstract class DataBaseRequest {
 
       /// Запрос для создания таблицы User
       static const String _createTableUser =
-      'CREATE TABLE "$tableUser" ("id" INTEGER, "login" TEXT NOT NULL UNIQUE, "password" TEXT NOT NULL, "FIO" TEXT not null, "photo" BLOB not null, "id_role" INTEGER, FOREIGN KEY("id_role") REFERENCES "Role_"("id") ON DELETE CASCADE,PRIMARY KEY("id"))';
+      'CREATE TABLE "$tableUser" ("id" INTEGER, "login" TEXT NOT NULL UNIQUE, "password" TEXT NOT NULL, "FIO" TEXT not null, "id_role" INTEGER, FOREIGN KEY("id_role") REFERENCES "Role_"("id") ON DELETE CASCADE,PRIMARY KEY("id"))';
 
       static const String _createTableColor =
       'CREATE TABLE "$tableColor" ("id" INTEGER, "name_color" TEXT NOT NULL UNIQUE, PRIMARY KEY("id" AUTOINCREMENT))';

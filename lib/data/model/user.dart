@@ -1,45 +1,35 @@
-import 'dart:html';
 import 'package:flutter/foundation.dart';
-import '../../domain/entity/user_entity.dart';
+import 'package:flutter_application_1/domain/entity/user_entity.dart';
+import 'package:flutter_application_1/domain/entity/role_entity.dart';
+import 'package:flutter_application_1/core/crypto/crypto.dart';
 
 class User extends UserEntity{
-  late int id;
-  final String login;
-  final String password;
-  final String FIO;
-  final Blob photo;
-  late int id_role;
 
   User({
-    required this.login,
-    required this.password,
-    required this.FIO,
-    required this.photo,
-    required this.id_role,
-  }) : super(
-            login: login,
-            password: password,
-            FIO: FIO,
-            photo: photo,
-            id_role: id_role);
+    super.id = 0,
+    required super.login, 
+    required super.password,
+    required super.FIO,
+    required super.id_role});
 
   Map<String, dynamic> toMap() {
     return {
       'login': login,
-      'password': password,
+      'password': Crypto.encoding(password),
       'FIO': FIO,
-      'photo': photo,
-      'id_role': id_role
+      'id_role': id_role.id,
     };
   }
 
   factory User.toFromMap(Map<String, dynamic> json) {
     return User(
+      id: json['id'] as int,
       login: json['login'],
       password: json['password'],
       FIO: json['FIO'],
-      photo: json['photo'],
-      id_role: json['id_role'],
+      id_role: RoleEnum.values.firstWhere(
+        (element) => element.id == (json['id_role'] as int),
+      ),
     );
   }
 }
