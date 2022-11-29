@@ -1,16 +1,47 @@
-# pr4
+# Практическая работа №3
+## Тема: "Авторизация и регистрация"
 
-A new Flutter project.
+### Цель работы: создать проект с использованием Cubit. Реализовать кликер если светлая тема за клик прибавляет +1 если темная тема прибавляется +2. Реализовать список нажатий и при какой теме это было реализовано. Все должно находиться на одном экране.
+### Ход работы:
 
-## Getting Started
+Создать проект с использованием Cubit <br>
+Создание проекта: ctrl + shift + p
+<p align="center">
+  <img src="/images/1bloc.png"/>
+</p>
 
-This project is a starting point for a Flutter application.
+<p align="center">
+  <img src="/images/2cubitproj.png"/>
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+Реализовать кликер если светлая тема за клик прибавляет +1 если темная тема прибавляется +2. Реализовать список нажатий и при какой теме это было реализовано
+<p align="center">
+  <img src="/images/3clickcubit.png"/>
+</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<p align="center">
+  <img src="/images/4main.png"/>
+</p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p align="center">
+  <img src="/images/5main.png"/>
+</p>
+
+<p align="center">
+  <img src="/images/6fabs.png"/>
+</p>
+
+<p align="center">
+  <img src="/images/7themes.png"/>
+</p>
+
+Все должно находиться на одном экране
+<p align="center">
+  <img src="/images/8lighttheme.png"/>
+</p>
+
+<p align="center">
+  <img src="/images/9darktheme.png"/>
+</p>
+
+### Вывод: в данной практической работе были получены практические навыки по работе с Cubit.
