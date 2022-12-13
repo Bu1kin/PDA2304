@@ -1,16 +1,23 @@
-# pr5_final
+# Практическая работа №5
+## Тема: "Shared Preferences"
 
-A new Flutter project.
+### Цель работы: Реализовать передачу данных через параметр arguments и сохранение данных в SharedPrefrences. (Оценка 4)
+### Ход работы:
 
-## Getting Started
+Вёрстка и передача ключа SharedPreferences аргументом.
 
-This project is a starting point for a Flutter application.
+![image](https://user-images.githubusercontent.com/99419010/207376863-4a8c4387-beab-446f-a1ff-cefd4c7cc1fc.png)
 
-A few resources to get you started if this is your first Flutter project:
+Второе окно с принятием ключа SharedPreferences
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![image](https://user-images.githubusercontent.com/99419010/207377038-bf247636-2c2e-41c3-a702-ee8233502a08.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Ввод в поле в первое окно
+
+![image](https://user-images.githubusercontent.com/99419010/207377112-c64e1e83-a5b8-4d72-96fe-a26e440ae720.png)
+
+Сохраненная строка во втором окне
+
+![image](https://user-images.githubusercontent.com/99419010/207377190-e33e4528-796b-4829-805b-5a4885e7f985.png)
+
+Вывод: в данной практической работе были получены практические навыки по работе с Shared Preferences во фреймворке Flutter
