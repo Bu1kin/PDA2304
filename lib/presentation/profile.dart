@@ -2,22 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/app_router.dart';
+import 'package:flutter_firebase/presentation/signIn.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
-
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
-  TextEditingController _loginCtrl = TextEditingController();
-  TextEditingController _passwordCtrl = TextEditingController();
-
-  GlobalKey<FormState> _key = GlobalKey();
+class Profile extends StatelessWidget {
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _loginCtrl = TextEditingController();
+    TextEditingController _passwordCtrl = TextEditingController();
+
+    GlobalKey<FormState> _key = GlobalKey();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -26,7 +21,7 @@ class _SignUpState extends State<SignUp> {
             key: _key,
             child: Column(
               children: [
-                const Text('Регистрация',
+                const Text('Ваш профиль',
                   style: TextStyle(
                     fontSize: 32,
                   ),
@@ -52,38 +47,16 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10.0),
-                  child: TextFormField(
-                    controller: _passwordCtrl,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: 'Пароль',
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: (){
-                          _passwordCtrl.clear();
-                        },
-                      )
-                    ),
-                  ),
-                ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        if(_key.currentState!.validate()){
-                          await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _loginCtrl.text, password: _passwordCtrl.text);
-                          await FirebaseFirestore.instance.collection("users")
-                            .add({"email": _loginCtrl.text, "password": _passwordCtrl.text});
+                        changeProfile(_loginCtrl.text);
                           
-                          Navigator.pushReplacementNamed(context, signInPage);
-                        }
+                        //Navigator.pushReplacementNamed(context, signInPage);
                       }, 
-                      child: Text('Подтвердить')
+                      child: Text('Изменить профиль')
                     ),
 
                     const SizedBox(width: 20),
@@ -96,7 +69,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ],
                 ),
-
                 const Spacer(),
               ]
             ),
@@ -104,5 +76,26 @@ class _SignUpState extends State<SignUp> {
         )
       ),
     );
+  }
+
+  Future<void> changeProfile(String email) async {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: userEmail, password: userPwd)
+        .then((userCredential) {
+      userCredential.user?.updateEmail(email);
+    });
+
+    await userChange(email);
+  }
+
+  Future<void> userChange(String email) async {
+    final user = FirebaseFirestore.instance.collection("users");
+    if (email != ""){
+      return user
+          .doc(userAutoId)
+          .set({'email': email, 'password': userPwd})
+          .then((value) => print("User updated"))
+          .catchError((error) => print(error.toString()));
+    }
   }
 }

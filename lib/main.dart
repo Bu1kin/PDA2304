@@ -44,7 +44,7 @@ class App extends StatelessWidget {
     }
     return MaterialApp(
       onGenerateRoute: router.generateRouter,
-      initialRoute: test,
+      initialRoute: signInPage,
     );
     
   }

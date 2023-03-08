@@ -14,11 +14,8 @@ class TestStatePage extends StatefulWidget {
 
 final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-TextEditingController _idCtrl = TextEditingController();
-TextEditingController _name = TextEditingController();
-TextEditingController _desc = TextEditingController();
-TextEditingController _category = TextEditingController();
-TextEditingController _sum = TextEditingController();
+TextEditingController _email = TextEditingController();
+TextEditingController _password = TextEditingController();
 
 GlobalKey<FormState> _key = GlobalKey();
 
@@ -41,14 +38,14 @@ class _TestStatePageState extends State<TestStatePage> {
                   Container(
                     margin: EdgeInsets.only(bottom: 10.0),
                     child: TextFormField(
-                      controller: _name,
+                      controller: _email,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        labelText: 'Название',
+                        labelText: 'Email',
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.clear),
                           onPressed: (){
-                            _name.clear();
+                            _email.clear();
                           },
                         )
                       ),
@@ -58,51 +55,15 @@ class _TestStatePageState extends State<TestStatePage> {
                   Container(
                     margin: EdgeInsets.only(bottom: 10.0),
                     child: TextFormField(
-                      controller: _desc,
+                      controller: _password,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        labelText: 'Описание',
+                        labelText: 'Пароль',
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.clear),
                           onPressed: (){
-                            _desc.clear();
-                          },
-                        )
-                      ),
-                    ),
-                  ),
-              
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
-                    child: TextFormField(
-                      controller: _category,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: 'Категория',
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: (){
-                            _category.clear();
-                          },
-                        )
-                      ),
-                    ),
-                  ),
-              
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
-                    child: TextFormField(
-                      controller: _sum,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: 'Сумма',
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: (){
-                            _sum.clear();
+                            _password.clear();
                           },
                         )
                       ),
@@ -143,7 +104,7 @@ class _TestStatePageState extends State<TestStatePage> {
             Expanded(
               flex: 70,
               child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection("finances").snapshots(),
+                stream: FirebaseFirestore.instance.collection("users").snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if(snapshot.hasData) {
                     return ListView.builder(
@@ -158,21 +119,22 @@ class _TestStatePageState extends State<TestStatePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Название: ${documentSnapshot['name']}", style: TextStyle(fontSize: 22)),
-                                Text("Описание: ${documentSnapshot['description']}", style: TextStyle(fontSize: 22)),
-                                Text("Категория: ${documentSnapshot['category']}", style: TextStyle(fontSize: 22)),
-                                Text("Дата: ${documentSnapshot['date']}", style: TextStyle(fontSize: 22)),
-                                Text("Сумма: ${documentSnapshot['sum']}", style: TextStyle(fontSize: 22)),
+                                // Text("Название: ${documentSnapshot['name']}", style: TextStyle(fontSize: 22)),
+                                // Text("Описание: ${documentSnapshot['description']}", style: TextStyle(fontSize: 22)),
+                                // Text("Категория: ${documentSnapshot['category']}", style: TextStyle(fontSize: 22)),
+                                // Text("Дата: ${documentSnapshot['date']}", style: TextStyle(fontSize: 22)),
+                                // Text("Сумма: ${documentSnapshot['sum']}", style: TextStyle(fontSize: 22)),
+                                Text("Email: ${documentSnapshot['email']}", style: TextStyle(fontSize: 22)),
+                                Text("Пароль: ${documentSnapshot['password']}", style: TextStyle(fontSize: 22)),
+                                
                                 const SizedBox(height: 8),
                                 Row(
                                   children: [
                                     SizedBox(height: 5),
                                     ElevatedButton(
                                       onPressed: () {
-                                        _name.text = documentSnapshot['name'];
-                                        _desc.text = documentSnapshot['description'];
-                                        _category.text = documentSnapshot['category'];
-                                        _sum.text = documentSnapshot['sum'];
+                                        _email.text = documentSnapshot['email'];
+                                        _password.text = documentSnapshot['password'];
                                       },
                                       child: const Icon(Icons.search)
                                     ),
@@ -218,20 +180,15 @@ class _TestStatePageState extends State<TestStatePage> {
   }
 
   Future<void> insertData() async {
-    final String name = _name.text;
-    final String desc = _desc.text;
-    final String category = _category.text;
-    final String date = DateTime.now().toString();
-    final String? sum = _sum.text;
+    final String email = _email.text;
+    final String password = _password.text;
 
-    if(_name.text.isNotEmpty && _desc.text.isNotEmpty && _category.text.isNotEmpty && _sum.text.isNotEmpty) {
-      await FirebaseFirestore.instance.collection("finances")
-        .add({"name": name, "description": desc, "category": category, "date": date, "sum": sum});
+    if(_email.text.isNotEmpty && _password.text.isNotEmpty) {
+      await FirebaseFirestore.instance.collection("users")
+        .add({"email": email, "password": password});
 
-      _name.clear();
-      _desc.clear();
-      _category.clear();
-      _sum.clear();
+      _email.clear();
+      _password.clear();
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Успешное добавление данных!")));
     }
@@ -241,21 +198,16 @@ class _TestStatePageState extends State<TestStatePage> {
   }
 
   Future<void> updateData([DocumentSnapshot? documentSnapshot]) async {
-    final String name = _name.text;
-    final String desc = _desc.text;
-    final String category = _category.text;
-    final String date = DateTime.now().toString();
-    final String? sum = _sum.text;
+    final String email = _email.text;
+    final String password = _password.text;
 
-    if(_name.text.isNotEmpty && _desc.text.isNotEmpty && _category.text.isNotEmpty && _sum.text.isNotEmpty) {
-      await FirebaseFirestore.instance.collection("finances")
+    if(_email.text.isNotEmpty && _password.text.isNotEmpty) {
+      await FirebaseFirestore.instance.collection("users")
         .doc(documentSnapshot!.id)
-        .update({"name": name, "description": desc, "category": category, "date": date, "sum": sum});
+        .update({"email": email, "password": password});
 
-      _name.clear();
-      _desc.clear();
-      _category.clear();
-      _sum.clear();
+      _email.clear();
+      _password.clear();
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Запись успешно обновлена!")));
     }
@@ -265,7 +217,7 @@ class _TestStatePageState extends State<TestStatePage> {
   }
 
   Future<void> deleteData(String id) async {
-    await FirebaseFirestore.instance.collection("finances")
+    await FirebaseFirestore.instance.collection("users")
       .doc(id)
       .delete();
     

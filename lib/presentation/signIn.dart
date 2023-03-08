@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/app_router.dart';
@@ -14,6 +15,9 @@ class SignIn extends StatefulWidget {
 }
 
 var email = "";
+var userAutoId = "";
+var userEmail = "";
+var userPwd = "";
 
 class _SignInState extends State<SignIn> {
   TextEditingController _loginCtrl = TextEditingController();
@@ -112,9 +116,13 @@ class _SignInState extends State<SignIn> {
                       onPressed: () async {
                           try{
                             await FirebaseAuth.instance.signInWithEmailAndPassword(email: _loginCtrl.text, password: _passwordCtrl.text).then((value) => {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Вы успешно вошли по Email и паролю!")))
                             });
-                            Navigator.pushReplacementNamed(context, test);
+                            final currentUser = FirebaseAuth.instance.currentUser;
+                            final currentUserId = FirebaseFirestore.instance.collection("users").doc(currentUser!.uid);
+                            userAutoId = currentUserId.id;
+                            userEmail = currentUser.email.toString();
+                            userPwd = _passwordCtrl.text;
+                            Navigator.pushReplacementNamed(context, profile);
                           }
                           catch(e){
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
